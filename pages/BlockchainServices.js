@@ -21,3 +21,48 @@ export const deposit = async () => {
   const tokenId = await Role.deposit();
   return tokenId;
 };
+
+export const getRemainingTime = async () => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(Address, gamblingabi, signer);
+  const tokenId = await Role.getRemainingTime();
+  return tokenId;
+};
+
+getPlayerTotalDeposit;
+
+export const getTotalPlayers = async () => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(Address, gamblingabi, signer);
+  const tokenId = await Role.getTotalPlayers();
+  return tokenId;
+};
+export const getPlayerDepositCount = async () => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(Address, gamblingabi, signer);
+  const tokenId = await Role.getPlayerDepositCount(signer);
+  return tokenId;
+};
+
+export const getPlayerTotalDeposit = async () => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(Address, gamblingabi, signer);
+  const tokenId = await Role.getPlayerTotalDeposit(signer);
+  return tokenId;
+};
