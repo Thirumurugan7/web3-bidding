@@ -1,7 +1,7 @@
 import React from "react";
 import { useTimer } from "react-timer-hook";
 
-function MyTimer({ expiryTimestamp }) {
+function MyTimer({ expiryTimestamp, gotTime }) {
   const {
     totalSeconds,
     seconds,
@@ -18,28 +18,18 @@ function MyTimer({ expiryTimestamp }) {
     onExpire: () => console.warn("onExpire called"),
   });
 
+  // Start the timer when gotTime is true and expiryTimestamp is valid
+  React.useEffect(() => {
+    if (gotTime && expiryTimestamp) {
+      start();
+    }
+  }, [gotTime, expiryTimestamp]);
+
   return (
     <div style={{ textAlign: "center" }}>
-      {/* <h1>react-timer-hook </h1>
-      <p>Timer Demo</p> */}
       <div style={{ fontSize: "100px" }}>
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:
-        <span>{seconds}</span>
+        <span>{expiryTimestamp}</span>
       </div>
-      {/* <p>{isRunning ? "Running" : "Not running"}</p>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
-      <button
-        onClick={() => {
-          // Restarts to 5 minutes timer
-          const time = new Date();
-          time.setSeconds(time.getSeconds() + 300);
-          restart(time);
-        }}
-      >
-        Restart
-      </button> */}
     </div>
   );
 }

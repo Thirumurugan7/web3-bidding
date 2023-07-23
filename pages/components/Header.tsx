@@ -75,17 +75,15 @@ const Header = () => {
   };
 
   const navigation = [
-    { name: "Home", subname: "", href: "#" },
     { name: "Deposit", subname: "", href: "/Deposit" },
-    { name: "Leaderboard", subname: "", href: "/" },
+    { name: "Leaderboard", subname: "", href: "/LeaderBoard" },
     { name: "My achivements", subname: "", href: "/" },
   ];
 
   const navigation2 = [
-    { name: "Home", subname: "", href: "#" },
     { name: "Deposit", subname: "", href: "/Deposit" },
-    { name: "Leaderboard", subname: "", href: "/" },
-    { name: "My achivements", subname: "", href: "/" },
+    { name: "Leaderboard", subname: "", href: "/LeaderBoard" },
+    { name: "Dashboard", subname: "", href: "/Dashboard" },
   ];
   if (typeof window !== "undefined") {
     localStorage.setItem("walletaddress", address || "");
@@ -121,7 +119,7 @@ const Header = () => {
           </div>
 
           <div className="hidden lg:flex lg:gap-x-12 ">
-            {address === "0x3907bAdE047531158c97c8C51b95c72a51E5e37e" ? (
+            {address === "0x8D578a6d833B4cf7adca871985dC82c79c76bbDE" ? (
               <>
                 {navigation.map((item) => (
                   <Link
@@ -151,8 +149,7 @@ const Header = () => {
             {connected ? (
               <>
                 <div className="text-md pt-2 font-bold text-blue-300">
-                  {/* My Account: {truncateEthAddress(address)} */}
-                  {address}
+                  My Account: {truncateEthAddress(address)}
                 </div>
                 <button
                   className="text-md btn-grad1 pt-2 font-bold text-white"
@@ -233,8 +230,8 @@ const Header = () => {
                   <p className=" block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-200 hover:bg-gray-700">
                     {connected ? (
                       <>
-                        {/* <div>My Accounts: {truncateEthAddress(address)}</div> */}
-                        {address}
+                        <div>My Account: {truncateEthAddress(address)}</div>
+
                         <button
                           className="btn-grad1"
                           onClick={handleDisconnect}
