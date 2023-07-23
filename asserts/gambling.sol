@@ -70,7 +70,7 @@ uint256 public depositAmount = 0.00001 ether;
     }
 
     function SplitDeposit() public  {
-        require(getRemainingTime() != 0, "cannot split");
+        require(getRemainingTime() == 0, "cannot split");
         if(totalPlayers == 0 ){
 emit NoPlayerDeposited();
         freezeGame();

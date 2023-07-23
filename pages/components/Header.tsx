@@ -76,14 +76,14 @@ const Header = () => {
 
   const navigation = [
     { name: "Home", subname: "", href: "#" },
-    { name: "Deposit", subname: "", href: "/" },
+    { name: "Deposit", subname: "", href: "/Deposit" },
     { name: "Leaderboard", subname: "", href: "/" },
     { name: "My achivements", subname: "", href: "/" },
   ];
 
   const navigation2 = [
     { name: "Home", subname: "", href: "#" },
-    { name: "Deposit", subname: "", href: "/" },
+    { name: "Deposit", subname: "", href: "/Deposit" },
     { name: "Leaderboard", subname: "", href: "/" },
     { name: "My achivements", subname: "", href: "/" },
   ];
@@ -92,7 +92,7 @@ const Header = () => {
   }
   return (
     <Web3Context.Provider value={Web3}>
-      <header className="absolute bg-black inset-x-0 top-0 z-50">
+      <header className="absolute inset-x-0 top-0 z-50 bg-black">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
           aria-label="Global"
@@ -104,7 +104,7 @@ const Header = () => {
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3ubq34_oesdLdOLr2uqUjDfI1XST4QYWu3gcpxAGK3ToUkCxKnQ38bMIJ3IVYf9BcIM4&usqp=CAU"
                 alt=""
               />
-              <p className="text-white font-bold pt-4 text-2xl">
+              <p className="pt-4 text-2xl font-bold text-white">
                 Crypto-Coffee
               </p>
             </Link>
@@ -150,8 +150,9 @@ const Header = () => {
             )}
             {connected ? (
               <>
-                <div className="text-blue-300 font-bold text-md pt-2">
-                  My Account: {truncateEthAddress(address)}
+                <div className="text-md pt-2 font-bold text-blue-300">
+                  {/* My Account: {truncateEthAddress(address)} */}
+                  {address}
                 </div>
                 <button
                   className="text-md btn-grad1 pt-2 font-bold text-white"
@@ -232,7 +233,8 @@ const Header = () => {
                   <p className=" block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-200 hover:bg-gray-700">
                     {connected ? (
                       <>
-                        <div>My Accounts: {truncateEthAddress(address)}</div>
+                        {/* <div>My Accounts: {truncateEthAddress(address)}</div> */}
+                        {address}
                         <button
                           className="btn-grad1"
                           onClick={handleDisconnect}

@@ -14,8 +14,7 @@ const dashboardLearnMoreText = "Learn more →";
 
 const Home: NextPage = () => {
   return (
-    <div className="flex bg-black text-white min-h-screen flex-col items-center justify-between p-24 bg-black">
-      <Header />
+    <div className="flex  min-h-screen flex-col items-center justify-between bg-black p-24 text-white">
       <div className="relative isolate px-6  lg:px-8">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-40"
@@ -43,7 +42,7 @@ const Home: NextPage = () => {
             <h1 className="text-4xl font-bold tracking-tight text-gray-200 sm:text-6xl">
               {dashboardTitle}
             </h1>
-            <p className="mt-6 text-lg leading-8 italic text-pink-600">
+            <p className="mt-6 text-lg italic leading-8 text-pink-600">
               {dashboardSubtitle}
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
