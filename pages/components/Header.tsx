@@ -121,7 +121,7 @@ const Header = () => {
           <div className="hidden lg:flex lg:gap-x-12 ">
             {address === "0x8D578a6d833B4cf7adca871985dC82c79c76bbDE" ? (
               <>
-                {navigation.map((item) => (
+                {navigation2.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
@@ -134,7 +134,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                {navigation2.map((item) => (
+                {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}

@@ -10,16 +10,6 @@ const LeaderBoard = () => {
     console.log("getting allWinners");
     const res = await getAllWinners();
 
-    // console.log(res);
-    // setWinnerData(res);
-
-    // res.map((val: any) => {
-    //   console.log(val[0]);
-    //   console.log(val[1].toString());
-    //   console.log(val[2].toString());
-    // });
-
-    // Convert winnerData to an array of objects
     const winnerDataArray = res.map((winner: any) => {
       return {
         address: winner[0],
@@ -36,12 +26,13 @@ const LeaderBoard = () => {
     allWinners();
     setGotData(true);
   }, []);
-  // Replace winnersData with your actual data
-  const winnersData = [
-    { address: "0x123abc", timestamp: "Jul 21, 2023", amount: "0.05 ETH" },
-    { address: "0x456def", timestamp: "Jul 20, 2023", amount: "0.03 ETH" },
-    // Add more winners' data as needed
-  ];
+
+  const gweiToEth = (gwei: any) => {
+    // 1 Ether (ETH) = 1,000,000,000 Gwei (Giga-wei)
+    const gweiInEther = 10 ** 9;
+    const ethValue = gwei / gweiInEther;
+    return ethValue.toFixed(5); // Return the value rounded to 5 decimal places
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-purple-500 via-pink-500 to-red-500">
@@ -76,10 +67,10 @@ const LeaderBoard = () => {
                   {winner.address}
                 </td>
                 <td className="border-b border-gray-200 px-4 py-3 text-sm">
-                  {winner.timestamp}
+                  {new Date(winner.timestamp * 1000).toLocaleString()}
                 </td>
                 <td className="border-b border-gray-200 px-4 py-3 text-sm">
-                  {winner.amount}
+                  {gweiToEth(gweiToEth(winner.amount))}
                 </td>
               </tr>
             ))}
