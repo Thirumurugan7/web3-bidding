@@ -5,7 +5,7 @@ import {
   changeDefaultTime,
   changeDepositAmount,
   resetDefaultTime,
-} from "./BlockchainServices";
+} from "../config/BlockchainServices";
 
 function Dashboard() {
   const [amount, setAmount] = useState("");

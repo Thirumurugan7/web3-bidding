@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getAllWinners } from "./BlockchainServices";
+import { getAllWinners } from "../config/BlockchainServices";
 import gif from "../200w.webp";
 import winnerImg from "../winner.jpeg";
 const LeaderBoard = () => {

@@ -1,5 +1,5 @@
 import Web3 from "web3";
-import gamblingabi from "./abi/gambling.json";
+import gamblingabi from "../pages/abi/gambling.json";
 import { ethers } from "ethers";
 
 const isBrowser = () => typeof window !== "undefined"; //The approach recommended by Next.js

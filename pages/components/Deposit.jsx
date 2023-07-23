@@ -10,7 +10,7 @@ import {
   getPlayerTotalDeposit,
   isGameCurrentlyFrozen,
   getDepositAmount,
-} from "../BlockchainServices";
+} from "../../config/BlockchainServices";
 import { useAccount } from "wagmi";
 import MyTimer from "./Timer";
 
