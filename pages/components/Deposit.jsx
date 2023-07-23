@@ -214,7 +214,7 @@ const Deposit = () => {
           </button>
         </div>
         <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-20 ">
-          <p>Get Pot Value:</p>
+          <p>Pot Value:</p>
           <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
             {potvalue}
           </button>
