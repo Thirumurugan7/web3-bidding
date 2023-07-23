@@ -37,8 +37,8 @@ uint256 public depositAmount = 0.00001 ether;
     event NewGameStarted();
 
     constructor() {
-        defaultTime = 100; 
-        defaultFreezeTime = 200;
+        defaultTime = 600; 
+        defaultFreezeTime = 500;
         owner = payable(msg.sender);
 
         resetTime();
@@ -55,7 +55,7 @@ uint256 public depositAmount = 0.00001 ether;
             return; // Exit the function if the game is frozen
         }
 
-        endTime += 10;
+        endTime += 100;
         lastDepositor = payable(msg.sender);
         playerDepositCount[msg.sender]++;
         playerTotalDeposit[msg.sender] += 0.00001 ether;
@@ -70,7 +70,7 @@ uint256 public depositAmount = 0.00001 ether;
     }
 
     function SplitDeposit() public  {
-        require(getRemainingTime() != 0, "cannot split");
+        require(getRemainingTime() == 0, "cannot split");
         if(totalPlayers == 0 ){
 emit NoPlayerDeposited();
         freezeGame();
