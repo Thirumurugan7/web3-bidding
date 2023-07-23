@@ -100,10 +100,10 @@ function Dashboard() {
       <div className="mt-4 flex space-x-4">
         <input
           type="text"
-          placeholder="Change Deposit Amount in (wei)"
+          placeholder="Deposit Amount in (wei)"
           value={amount}
           onChange={handleChangeAmount}
-          className="rounded-lg border px-4 py-2 focus:border-blue-300 focus:outline-none focus:ring"
+          className=" rounded-lg border px-4 py-2 focus:border-blue-300 focus:outline-none focus:ring"
         />
         <button
           onClick={handleSubmitAmount}
