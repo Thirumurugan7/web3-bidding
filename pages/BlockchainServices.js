@@ -92,6 +92,21 @@ export const SplitDeposit = async () => {
   console.log(tokenId);
   return tokenId;
 };
+export const UnFreeze = async () => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  console.log(provider);
+  const signer = provider.getSigner();
+  console.log(signer);
+  const Role = new ethers.Contract(Address, gamblingabi, signer);
+  console.log(Role);
+
+  const tokenId = await Role.unfreezeGame();
+  console.log(tokenId);
+  return tokenId;
+};
 
 export const getLastDepositor = async () => {
   const provider =
