@@ -57,17 +57,23 @@ const useTimer = () => {
     };
     const automateSplitAndUnfreeze = async () => {
       // Check if the game is not frozen and remaining time is 0
+      console.log("Timer:", timer);
+      console.log("Freezetime:", freezetime);
+
       if (timer === "00:00") {
-        // Wait for 1 minute (60 seconds)
+        // Wait for 15 seconds
         await new Promise((resolve) => setTimeout(resolve, 15000));
 
         // Call the SplitDeposit function
         try {
+          console.log("Calling SplitDeposit...");
           const splitTx = await SplitDeposit();
           await splitTx.wait(); // Wait for the transaction to be mined
           console.log("SplitDeposit function called successfully!");
+
           if (freezetime === "00:00") {
             // Call the unfreezeGame function
+            console.log("Calling UnFreeze...");
             const unfreezeTx = await UnFreeze();
             await unfreezeTx.wait(); // Wait for the transaction to be mined
             console.log("UnFreeze function called successfully!");
