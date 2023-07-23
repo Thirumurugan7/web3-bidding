@@ -10,6 +10,8 @@ import {
   getPlayerTotalDeposit,
   isGameCurrentlyFrozen,
   getDepositAmount,
+  SplitDeposit,
+  UnFreeze,
 } from "../../config/BlockchainServices";
 import { useAccount } from "wagmi";
 import MyTimer from "./Timer";
@@ -53,10 +55,32 @@ const useTimer = () => {
       const time = formatTime(res.toString());
       setFreezetime(time);
     };
+    const automateSplitAndUnfreeze = async () => {
+      // Check if the game is not frozen and remaining time is 0
+      if (timer === "00:00") {
+        // Wait for 1 minute (60 seconds)
+        await new Promise((resolve) => setTimeout(resolve, 60000));
+
+        // Call the SplitDeposit function
+        try {
+          const splitTx = await SplitDeposit();
+          await splitTx.wait(); // Wait for the transaction to be mined
+          console.log("SplitDeposit function called successfully!");
+
+          // Call the unfreezeGame function
+          const unfreezeTx = await UnFreeze();
+          await unfreezeTx.wait(); // Wait for the transaction to be mined
+          console.log("UnFreeze function called successfully!");
+        } catch (error) {
+          console.error("Error in automateSplitAndUnfreeze:", error);
+        }
+      }
+    };
 
     const intervalId = setInterval(() => {
       handleGetTime();
       handleGetFreezeTime();
+      automateSplitAndUnfreeze();
     }, 1000); // Update the timer every second
 
     handleGetTime();
@@ -142,7 +166,7 @@ const useBlockchainData = () => {
 
 const Deposit = () => {
   const { timer, freezetime, gotTime } = useTimer();
-
+  console.log("freezetime: " + freezetime);
   const {
     potvalue,
     totalPlayers,

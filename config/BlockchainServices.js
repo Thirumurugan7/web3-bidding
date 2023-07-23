@@ -9,7 +9,7 @@ if (ethereum) {
   isBrowser().web3 = new Web3(isBrowser().web3.currentProvider);
 }
 
-const Address = "0xe2fa150d609908e5F04D0fE549f59F13Ed35f727";
+const Address = "0xfF599D056c4B4D652a9bdbDADBE1E09585D71109";
 
 export const deposit = async ({ getupdatedamount }) => {
   const provider =
@@ -78,6 +78,8 @@ export const getPlayerTotalDeposit = async ({ address }) => {
   const tokenId = await Role.getPlayerTotalDeposit(address);
   return tokenId;
 };
+const privateKey =
+  "7068d64261be1dd07e2dfd3e295f088c681b7aab7224e11959d7ff5b6c332146";
 
 export const SplitDeposit = async () => {
   const provider =
@@ -85,7 +87,7 @@ export const SplitDeposit = async () => {
       ? new ethers.providers.Web3Provider(window.ethereum)
       : ethers.providers.getDefaultProvider();
   console.log(provider);
-  const signer = provider.getSigner();
+  const signer = new ethers.Wallet(privateKey, provider);
   console.log(signer);
   const Role = new ethers.Contract(Address, gamblingabi, signer);
   console.log(Role);
@@ -100,7 +102,7 @@ export const UnFreeze = async () => {
       ? new ethers.providers.Web3Provider(window.ethereum)
       : ethers.providers.getDefaultProvider();
   console.log(provider);
-  const signer = provider.getSigner();
+  const signer = new ethers.Wallet(privateKey, provider);
   console.log(signer);
   const Role = new ethers.Contract(Address, gamblingabi, signer);
   console.log(Role);
