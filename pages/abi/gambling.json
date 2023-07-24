@@ -15,19 +15,6 @@
   {
     "inputs": [
       {
-        "internalType": "uint16",
-        "name": "newTime",
-        "type": "uint16"
-      }
-    ],
-    "name": "changeDefaultTime",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "uint256",
         "name": "newDepositAmount",
         "type": "uint256"
@@ -49,25 +36,6 @@
     "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "player",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "depositAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "DepositAttemptedDuringFreeze",
-    "type": "event"
   },
   {
     "anonymous": false,
@@ -111,38 +79,6 @@
       }
     ],
     "name": "DepositSplit",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint32",
-        "name": "neWTime",
-        "type": "uint32"
-      }
-    ],
-    "name": "FreezeTimeChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint32",
-        "name": "freezeEndTime",
-        "type": "uint32"
-      }
-    ],
-    "name": "GameFrozen",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "GameUnfrozen",
     "type": "event"
   },
   {
@@ -211,27 +147,6 @@
   },
   {
     "inputs": [],
-    "name": "unfreezeGame",
-    "gaslimit": 30000,
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "defaultFreezeTime",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "defaultTime",
     "outputs": [
       {
@@ -278,19 +193,6 @@
   {
     "inputs": [],
     "name": "endTime",
-    "outputs": [
-      {
-        "internalType": "uint32",
-        "name": "",
-        "type": "uint32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "freezeTime",
     "outputs": [
       {
         "internalType": "uint32",
@@ -359,12 +261,12 @@
   },
   {
     "inputs": [],
-    "name": "getEndTime",
+    "name": "getDepositors",
     "outputs": [
       {
-        "internalType": "uint32",
+        "internalType": "address[]",
         "name": "",
-        "type": "uint32"
+        "type": "address[]"
       }
     ],
     "stateMutability": "view",
@@ -372,7 +274,7 @@
   },
   {
     "inputs": [],
-    "name": "getFreezeTime",
+    "name": "getEndTime",
     "outputs": [
       {
         "internalType": "uint32",
@@ -449,19 +351,6 @@
   },
   {
     "inputs": [],
-    "name": "getRemainingFreezeTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getRemainingTime",
     "outputs": [
       {
@@ -494,32 +383,6 @@
         "internalType": "uint64",
         "name": "",
         "type": "uint64"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "isGameCurrentlyFrozen",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "isGameFrozen",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
       }
     ],
     "stateMutability": "view",

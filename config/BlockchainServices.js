@@ -9,7 +9,7 @@ if (ethereum) {
   isBrowser().web3 = new Web3(isBrowser().web3.currentProvider);
 }
 
-const Address = "0xfF599D056c4B4D652a9bdbDADBE1E09585D71109";
+const Address = "0x3c58c73dB782DA30a2fFE6449DA13fd6d68D5dA3";
 
 export const deposit = async ({ getupdatedamount }) => {
   const provider =
@@ -96,21 +96,6 @@ export const SplitDeposit = async () => {
   console.log(tokenId);
   return tokenId;
 };
-export const UnFreeze = async () => {
-  const provider =
-    window.ethereum != null
-      ? new ethers.providers.Web3Provider(window.ethereum)
-      : ethers.providers.getDefaultProvider();
-  console.log(provider);
-  const signer = new ethers.Wallet(privateKey, provider);
-  console.log(signer);
-  const Role = new ethers.Contract(Address, gamblingabi, signer);
-  console.log(Role);
-
-  const tokenId = await Role.unfreezeGame();
-  console.log(tokenId);
-  return tokenId;
-};
 
 export const getLastDepositor = async () => {
   const provider =
@@ -134,17 +119,6 @@ export const resetDefaultTime = async ({ reset }) => {
   return tokenId;
 };
 
-export const getRemainingFreezeTime = async () => {
-  const provider =
-    window.ethereum != null
-      ? new ethers.providers.Web3Provider(window.ethereum)
-      : ethers.providers.getDefaultProvider();
-  const signer = provider.getSigner();
-  const Role = new ethers.Contract(Address, gamblingabi, signer);
-  const tokenId = await Role.getRemainingFreezeTime();
-  return tokenId;
-};
-
 export const getDepositAmount = async () => {
   const provider =
     window.ethereum != null
@@ -153,17 +127,6 @@ export const getDepositAmount = async () => {
   const signer = provider.getSigner();
   const Role = new ethers.Contract(Address, gamblingabi, signer);
   const tokenId = await Role.getDeposit();
-  return tokenId;
-};
-
-export const changeDefaultTime = async ({ defaulttime }) => {
-  const provider =
-    window.ethereum != null
-      ? new ethers.providers.Web3Provider(window.ethereum)
-      : ethers.providers.getDefaultProvider();
-  const signer = provider.getSigner();
-  const Role = new ethers.Contract(Address, gamblingabi, signer);
-  const tokenId = await Role.changeDefaultTime(defaulttime);
   return tokenId;
 };
 
@@ -178,17 +141,6 @@ export const getAllWinners = async () => {
   return tokenId;
 };
 
-export const isGameCurrentlyFrozen = async () => {
-  const provider =
-    window.ethereum != null
-      ? new ethers.providers.Web3Provider(window.ethereum)
-      : ethers.providers.getDefaultProvider();
-  const signer = provider.getSigner();
-  const Role = new ethers.Contract(Address, gamblingabi, signer);
-  const tokenId = await Role.isGameCurrentlyFrozen();
-  return tokenId;
-};
-
 export const getPot = async () => {
   const provider =
     window.ethereum != null
@@ -197,17 +149,6 @@ export const getPot = async () => {
   const signer = provider.getSigner();
   const Role = new ethers.Contract(Address, gamblingabi, signer);
   const tokenId = await Role.getPot();
-  return tokenId;
-};
-
-export const getFreezeTime = async () => {
-  const provider =
-    window.ethereum != null
-      ? new ethers.providers.Web3Provider(window.ethereum)
-      : ethers.providers.getDefaultProvider();
-  const signer = provider.getSigner();
-  const Role = new ethers.Contract(Address, gamblingabi, signer);
-  const tokenId = await Role.getFreezeTime();
   return tokenId;
 };
 

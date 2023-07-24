@@ -3,18 +3,16 @@ import {
   deposit,
   getTotalPlayers,
   getRemainingTime,
-  getRemainingFreezeTime,
   getLastDepositor,
   getPot,
   getPlayerDepositCount,
   getPlayerTotalDeposit,
-  isGameCurrentlyFrozen,
   getDepositAmount,
   SplitDeposit,
-  UnFreeze,
 } from "../../config/BlockchainServices";
 import { useAccount } from "wagmi";
 import MyTimer from "./Timer";
+import { createKey } from "next/dist/shared/lib/router/router";
 
 const weiToEth = (wei) => {
   // 1 Ether (ETH) = 10^18 Wei
@@ -40,44 +38,50 @@ const formatTime = (seconds) => {
 
 const useTimer = () => {
   const [timer, setTimer] = useState(0);
-  const [freezetime, setFreezetime] = useState("");
+
   const [gotTime, setGotTime] = useState(false);
+
+  const [isGameEnded, setIsGameEnded] = useState(false);
+
+  const [endGame, setEndGame] = useState(false);
+  useEffect(() => {
+    if (timer === "00:00") {
+      setIsGameEnded(true);
+      console.log(timer, isGameEnded);
+    }
+  }, [timer]);
 
   useEffect(() => {
     const handleGetTime = async () => {
       const res = await getRemainingTime();
       const time = formatTime(res.toString());
+      console.log("rem timme:", time, typeof time);
+      if (time === "00:00") {
+        console.log(true);
+        setEndGame(true);
+      }
+      console.log(endGame);
       setTimer(time);
     };
 
-    const handleGetFreezeTime = async () => {
-      const res = await getRemainingFreezeTime();
-      const time = formatTime(res.toString());
-      setFreezetime(time);
-    };
     const automateSplitAndUnfreeze = async () => {
       // Check if the game is not frozen and remaining time is 0
       console.log("Timer:", timer);
-      console.log("Freezetime:", freezetime);
 
-      if (timer == "00:00") {
+      if (timer === "0" || timer === "00:00" || endGame) {
         // Wait for 15 seconds
         console.log("intered timer");
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 100));
 
         // Call the SplitDeposit function
         try {
-          console.log("Calling SplitDeposit...");
-          const splitTx = await SplitDeposit();
-          await splitTx.wait(); // Wait for the transaction to be mined
-          console.log("SplitDeposit function called successfully!");
+          if ("something") {
+            console.log("Calling SplitDeposit...");
+            const splitTx = await SplitDeposit();
+            await splitTx.wait(); // Wait for the transaction to be mined
+            console.log("SplitDeposit function called successfully!");
 
-          if (freezetime == "00:00") {
-            // Call the unfreezeGame function
-            console.log("Calling UnFreeze...");
-            const unfreezeTx = await UnFreeze();
-            await unfreezeTx.wait(); // Wait for the transaction to be mined
-            console.log("UnFreeze function called successfully!");
+            return;
           }
         } catch (error) {
           console.error("Error in automateSplitAndUnfreeze:", error);
@@ -87,12 +91,11 @@ const useTimer = () => {
 
     const intervalId = setInterval(() => {
       handleGetTime();
-      handleGetFreezeTime();
+
       automateSplitAndUnfreeze();
     }, 1000); // Update the timer every second
 
     handleGetTime();
-    handleGetFreezeTime();
     setGotTime(true);
 
     // Clean up the interval when the component unmounts
@@ -101,7 +104,7 @@ const useTimer = () => {
     };
   }, []);
 
-  return { timer, freezetime, gotTime };
+  return { timer, gotTime };
 };
 
 const useBlockchainData = () => {
@@ -110,7 +113,6 @@ const useBlockchainData = () => {
   const [totalPlayers, setTotalPlayers] = useState("");
   const [LastDepositor, setlastDepositor] = useState("");
   const [mydeposit, SetMydeposit] = useState("");
-  const [frozen, setIsFrozen] = useState("");
   // const [address, setaddress] = useState("");
   const [depositamount, setdeposit] = useState("");
   useEffect(() => {
@@ -122,10 +124,6 @@ const useBlockchainData = () => {
     const getLastDepositoraddress = async () => {
       const res = await getLastDepositor();
       setlastDepositor(res);
-    };
-    const isGameFrozen = async () => {
-      const res = await isGameCurrentlyFrozen();
-      setIsFrozen(res);
     };
 
     const getTotalPlayersfunc = async () => {
@@ -147,7 +145,7 @@ const useBlockchainData = () => {
     const intervalId = setInterval(() => {
       getPotvalue();
       getTotalPlayersfunc();
-      isGameFrozen();
+
       getdepo();
       getLastDepositoraddress();
       getIndividualDeposit();
@@ -167,23 +165,22 @@ const useBlockchainData = () => {
     totalPlayers,
     LastDepositor,
     mydeposit,
-    frozen,
+
     depositamount,
   };
 };
 
 const Deposit = () => {
-  const { timer, freezetime, gotTime } = useTimer();
-  console.log("freezetime: " + freezetime);
+  const { timer, gotTime } = useTimer();
   const {
     potvalue,
     totalPlayers,
     LastDepositor,
     mydeposit,
-    frozen,
+
     depositamount,
   } = useBlockchainData();
-  console.log("froze", frozen);
+
   const [expiryTimestamp, setExpiryTimestamp] = useState(0); // Add expiryTimestamp state
 
   useEffect(() => {
@@ -229,16 +226,7 @@ const Deposit = () => {
             </div>
           </div>
         )}
-        {frozen == true ? (
-          <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-20 ">
-            <p>Freeze Time:</p>
-            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-              {freezetime}
-            </button>
-          </div>
-        ) : (
-          <></>
-        )}
+
         <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-20 ">
           <p>Deposit Amount:</p>
           <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
@@ -268,17 +256,10 @@ const Deposit = () => {
       <div>
         {gotTime ? (
           <>
-            {frozen == true ? (
-              <>
-                <p className="text-center text-xl">Freezen Time :</p>
-                <MyTimer expiryTimestamp={freezetime} gotTime={gotTime} />
-              </>
-            ) : (
-              <>
-                <p className="text-center text-xl">Remaining Time:</p>
-                <MyTimer expiryTimestamp={timer} gotTime={gotTime} />
-              </>
-            )}
+            <>
+              <p className="text-center text-xl">Remaining Time:</p>
+              <MyTimer expiryTimestamp={timer} gotTime={gotTime} />
+            </>
           </>
         ) : (
           <p>Time not got</p>

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import {
   SplitDeposit,
-  UnFreeze,
-  changeDefaultTime,
   changeDepositAmount,
   resetDefaultTime,
   addOwnerFunc,
@@ -10,14 +8,8 @@ import {
 
 function Dashboard() {
   const [amount, setAmount] = useState("");
-  const [defaulttime, setDefaulttime] = useState();
   const [reset, setReset] = useState();
   const [owner, setOwner] = useState("");
-
-  const handleUnFreeze = async () => {
-    const res = await UnFreeze();
-    console.log(res);
-  };
 
   const handleSplitDeposit = async () => {
     const res = await SplitDeposit();
@@ -37,9 +29,6 @@ function Dashboard() {
   const handleChangeOwner = (e: any) => {
     setOwner(e.target.value);
   };
-  const handleChangeDefault = (e: any) => {
-    setDefaulttime(e.target.value);
-  };
 
   const handleSubmitAmount = async () => {
     const res = await changeDepositAmount({ amount });
@@ -49,23 +38,12 @@ function Dashboard() {
   const handleOwnerSubmit = async () => {
     const res = await addOwnerFunc({ owner });
   };
-  const Default = async () => {
-    console.log(defaulttime);
-    const res = await changeDefaultTime({ defaulttime });
-    console.log(res);
-  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-purple-500 via-pink-500 to-red-500">
       <h1 className="mb-8 text-4xl font-bold text-white">Organizer Page</h1>
 
       <div className="mb-8 flex space-x-4">
-        <button
-          onClick={handleUnFreeze}
-          className="rounded-lg bg-blue-500 px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-blue-600"
-        >
-          Un Freeze
-        </button>
         <button
           onClick={handleSplitDeposit}
           className="rounded-lg bg-green-500 px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-green-600"
@@ -84,22 +62,6 @@ function Dashboard() {
         />
         <button
           onClick={handleresettime}
-          className="rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-yellow-600"
-        >
-          Submit
-        </button>
-      </div>
-
-      <div className="mt-4 flex space-x-4">
-        <input
-          type="text"
-          placeholder="Change Freezing time in (s)"
-          value={defaulttime}
-          onChange={handleChangeDefault}
-          className="rounded-lg border px-4 py-2 focus:border-blue-300 focus:outline-none focus:ring"
-        />
-        <button
-          onClick={Default}
           className="rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-yellow-600"
         >
           Submit
