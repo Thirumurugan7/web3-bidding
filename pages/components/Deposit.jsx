@@ -60,11 +60,11 @@ const useTimer = () => {
       console.log("Timer:", timer);
       console.log("Freezetime:", freezetime);
 
-      if (timer === "00:00" || timer === "0") {
+      if (timer == "00:00") {
         // Wait for 15 seconds
         console.log("intered timer");
-        const r1 = await new Promise((resolve) => setTimeout(resolve, 1000));
-        console.log(r1);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         // Call the SplitDeposit function
         try {
           console.log("Calling SplitDeposit...");
