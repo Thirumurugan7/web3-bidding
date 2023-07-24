@@ -77,7 +77,6 @@ const Header = () => {
   const navigation = [
     { name: "Deposit", subname: "", href: "/Deposit" },
     { name: "Leaderboard", subname: "", href: "/LeaderBoard" },
-    { name: "My achivements", subname: "", href: "/" },
   ];
 
   const navigation2 = [

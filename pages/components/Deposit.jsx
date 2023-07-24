@@ -215,13 +215,13 @@ const Deposit = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gradient-to-b from-purple-500 via-pink-500 to-red-500 pb-20 pt-40 text-white">
+    <div className="flex flex-col items-center justify-center  pb-0 pt-40 text-white">
       <div className="flex flex-row space-x-20 rounded-lg border-x border-x-white p-5 pb-16">
         {isGameEnded ? (
           <></>
         ) : (
           <div className="">
-            <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-20 ">
+            <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 pb-[50px]">
               <p>My Deposit:</p>
               <p className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
                 {mydeposit}
@@ -230,19 +230,19 @@ const Deposit = () => {
           </div>
         )}
 
-        <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-20 ">
-          <p>Deposit Amount:</p>
+        <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
+          <p>Deposit Amount: </p>
           <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
             {depositamount}
           </button>
         </div>
-        <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-20 ">
+        <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
           <p>Pot Value:</p>
           <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
             {potvalue}
           </button>
         </div>
-        <div className="flex flex-col rounded-lg border border-white border-x-white p-20 ">
+        <div className="flex flex-col rounded-lg border border-white border-x-white p-8 ">
           <p className="text-center">
             {" "}
             Total Number<br></br> of players:
@@ -283,7 +283,7 @@ const Deposit = () => {
           </>
         ) : (
           <button
-            className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg"
+            className="rounded-lg bg-blue-700  px-6 py-3 text-white shadow-lg"
             onClick={handleClick}
           >
             Deposit
