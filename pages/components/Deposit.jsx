@@ -48,6 +48,7 @@ const useTimer = () => {
     if (timer === "00:00") {
       setIsGameEnded(true);
       console.log(timer, isGameEnded);
+      setEndGame(true);
     }
   }, [timer]);
 
@@ -67,8 +68,10 @@ const useTimer = () => {
     const automateSplitAndUnfreeze = async () => {
       // Check if the game is not frozen and remaining time is 0
       console.log("Timer:", timer);
-
-      if (timer === "0" || timer === "00:00" || endGame) {
+      const res = await getRemainingTime();
+      const time = formatTime(res.toString());
+      console.log("rem timme:", time, typeof time);
+      if (time === "0" || time === "00:00" || endGame) {
         // Wait for 15 seconds
         console.log("intered timer");
         await new Promise((resolve) => setTimeout(resolve, 100));
