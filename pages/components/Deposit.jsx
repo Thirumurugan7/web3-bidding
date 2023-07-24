@@ -60,10 +60,11 @@ const useTimer = () => {
       console.log("Timer:", timer);
       console.log("Freezetime:", freezetime);
 
-      if (timer === "00:00") {
+      if (timer === "00:00" || timer === "0") {
         // Wait for 15 seconds
-        await new Promise((resolve) => setTimeout(resolve, 15000));
-
+        console.log("intered timer");
+        const r1 = await new Promise((resolve) => setTimeout(resolve, 1000));
+        console.log(r1);
         // Call the SplitDeposit function
         try {
           console.log("Calling SplitDeposit...");
@@ -71,7 +72,7 @@ const useTimer = () => {
           await splitTx.wait(); // Wait for the transaction to be mined
           console.log("SplitDeposit function called successfully!");
 
-          if (freezetime === "00:00") {
+          if (freezetime == "00:00") {
             // Call the unfreezeGame function
             console.log("Calling UnFreeze...");
             const unfreezeTx = await UnFreeze();

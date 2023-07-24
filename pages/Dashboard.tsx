@@ -5,12 +5,14 @@ import {
   changeDefaultTime,
   changeDepositAmount,
   resetDefaultTime,
+  addOwnerFunc,
 } from "../config/BlockchainServices";
 
 function Dashboard() {
   const [amount, setAmount] = useState("");
   const [defaulttime, setDefaulttime] = useState();
   const [reset, setReset] = useState();
+  const [owner, setOwner] = useState("");
 
   const handleUnFreeze = async () => {
     const res = await UnFreeze();
@@ -32,6 +34,9 @@ function Dashboard() {
   const handleChangeReset = (e: any) => {
     setReset(e.target.value);
   };
+  const handleChangeOwner = (e: any) => {
+    setOwner(e.target.value);
+  };
   const handleChangeDefault = (e: any) => {
     setDefaulttime(e.target.value);
   };
@@ -39,6 +44,10 @@ function Dashboard() {
   const handleSubmitAmount = async () => {
     const res = await changeDepositAmount({ amount });
     console.log(res);
+  };
+
+  const handleOwnerSubmit = async () => {
+    const res = await addOwnerFunc({ owner });
   };
   const Default = async () => {
     console.log(defaulttime);
@@ -68,7 +77,7 @@ function Dashboard() {
       <div className="flex space-x-4">
         <input
           type="text"
-          placeholder="Change Game time"
+          placeholder="Change Game time in (s)"
           value={reset}
           onChange={handleChangeReset}
           className="rounded-lg border px-4 py-2 focus:border-blue-300 focus:outline-none focus:ring"
@@ -84,7 +93,7 @@ function Dashboard() {
       <div className="mt-4 flex space-x-4">
         <input
           type="text"
-          placeholder="Change Freezing time"
+          placeholder="Change Freezing time in (s)"
           value={defaulttime}
           onChange={handleChangeDefault}
           className="rounded-lg border px-4 py-2 focus:border-blue-300 focus:outline-none focus:ring"
@@ -107,6 +116,21 @@ function Dashboard() {
         />
         <button
           onClick={handleSubmitAmount}
+          className="rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-yellow-600"
+        >
+          Submit
+        </button>
+      </div>
+      <div className="mt-4 flex space-x-4">
+        <input
+          type="text"
+          placeholder="add new owner"
+          value={owner}
+          onChange={handleChangeOwner}
+          className=" rounded-lg border px-4 py-2 focus:border-blue-300 focus:outline-none focus:ring"
+        />
+        <button
+          onClick={handleOwnerSubmit}
           className="rounded-lg bg-yellow-500 px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-yellow-600"
         >
           Submit

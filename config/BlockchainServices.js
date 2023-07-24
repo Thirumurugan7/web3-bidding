@@ -48,13 +48,13 @@ export const getTotalPlayers = async () => {
       ? new ethers.providers.Web3Provider(window.ethereum)
       : ethers.providers.getDefaultProvider();
 
-  console.log(provider);
+  //console.log(provider);
   const signer = provider.getSigner();
-  console.log(signer);
+  //console.log(signer);
   const Role = new ethers.Contract(Address, gamblingabi, signer);
-  console.log(Role);
+  //console.log(Role);
   const tokenId = await Role.getTotalPlayers();
-  console.log(tokenId);
+  //console.log(tokenId);
   return tokenId;
 };
 export const getPlayerDepositCount = async ({ address }) => {
@@ -241,5 +241,15 @@ export const changeDepositAmount = async ({ amount }) => {
   const signer = provider.getSigner();
   const Role = new ethers.Contract(Address, gamblingabi, signer);
   const tokenId = await Role.changeDepositAmount(amount);
+  return tokenId;
+};
+export const addOwnerFunc = async ({ owner }) => {
+  const provider =
+    window.ethereum != null
+      ? new ethers.providers.Web3Provider(window.ethereum)
+      : ethers.providers.getDefaultProvider();
+  const signer = provider.getSigner();
+  const Role = new ethers.Contract(Address, gamblingabi, signer);
+  const tokenId = await Role.addOwner(owner);
   return tokenId;
 };
