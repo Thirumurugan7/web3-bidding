@@ -278,7 +278,7 @@ const Deposit = () => {
             </p>
             <p className="text-center text-xl font-bold text-red-800">
               Ooops, Game is ended.
-              <br /> wait for the admin to unfreeze it
+              <br /> wait for the game to reset......
             </p>
           </>
         ) : (
