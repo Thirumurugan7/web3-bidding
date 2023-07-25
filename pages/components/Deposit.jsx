@@ -13,6 +13,7 @@ import {
 import { useAccount } from "wagmi";
 
 import CountdownTimer from "./Timer";
+import RefreshButton from "./Refresh";
 
 const weiToEth = (wei) => {
   // 1 Ether (ETH) = 10^18 Wei
@@ -59,6 +60,9 @@ const useTimer = () => {
       const timeInSecond = parseInt(res, 10);
       console.log(timeInSecond);
       setTimer(timeInSecond);
+      localStorage.setItem("timerValue", timeInSecond);
+
+      setGotTime(true);
       const time = formatTime(res.toString());
       console.log("rem timme:", time, typeof time);
 
@@ -90,6 +94,11 @@ const useTimer = () => {
             await splitTx.wait(); // Wait for the transaction to be mined
             console.log("SplitDeposit function called successfully!");
 
+            const res = await getRemainingTime();
+            const timeInSecond = parseInt(res, 10);
+            console.log(timeInSecond, typeof timeInSecond);
+            setTimer(timeInSeconds);
+            window.location.reload();
             return;
           }
         } catch (error) {
@@ -267,6 +276,7 @@ const Deposit = () => {
         } else {
           // Notify the user to switch to the "bifrost" network
           alert("Please switch to the Bifrost network to deposit.");
+          await changeMetaMaskNetwork();
           // Optionally, you can provide the user with a link or instructions to switch networks.
           // For example, you can direct them to a guide on how to change networks in MetaMask.
         }
@@ -330,7 +340,10 @@ const Deposit = () => {
               <p className="text-center text-xl">Remaining Time:</p>
               {/* <MyTimer expiryTimestamp={timer} gotTime={gotTime} /> */}
               {console.log(timer)}
-              <CountdownTimer initialTime={timer} />
+              {console.log(localStorage.getItem("timerValue"))}
+              <CountdownTimer
+                initialTime={localStorage.getItem("timerValue")}
+              />
             </>
           </>
         ) : (
@@ -338,7 +351,7 @@ const Deposit = () => {
         )}
       </div>
 
-      <div className="mt-8 animate-bounce">
+      <div className="mt-8">
         {isGameEnded ? (
           <>
             <p className="text-center text-xl font-bold text-green-500">
@@ -359,6 +372,7 @@ const Deposit = () => {
           </button>
         )}
       </div>
+      <RefreshButton />
     </div>
   );
 };
