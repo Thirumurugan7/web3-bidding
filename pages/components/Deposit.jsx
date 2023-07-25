@@ -9,10 +9,11 @@ import {
   getPlayerTotalDeposit,
   getDepositAmount,
   SplitDeposit,
+  getEndTime,
 } from "../../config/BlockchainServices";
 import { useAccount } from "wagmi";
 
-import CountdownTimer from "./Timer";
+// import CountdownTimer from "./Timer";
 import RefreshButton from "./Refresh";
 
 const weiToEth = (wei) => {
@@ -78,6 +79,7 @@ const useTimer = () => {
       // Check if the game is not frozen and remaining time is 0
       console.log("Timer:", timer);
       const res = await getRemainingTime();
+      localStorage.setItem("timerValue", parseInt(res, 10));
       const time = formatTime(res.toString());
       console.log("rem timme:", time, typeof time);
 
@@ -131,6 +133,8 @@ const useBlockchainData = () => {
   const [totalPlayers, setTotalPlayers] = useState("");
   const [LastDepositor, setlastDepositor] = useState("");
   const [mydeposit, SetMydeposit] = useState("");
+  const [timeForClock, setTimeForClock] = useState();
+  const [endTime, setendTime] = useState("");
 
   // const [address, setaddress] = useState("");
   const [depositamount, setdeposit] = useState("");
@@ -139,6 +143,12 @@ const useBlockchainData = () => {
       const res = await getPot();
       const ethValue = weiToEth(res.toString());
       setPotvalue(ethValue);
+    };
+
+    const getEndTimeForClock = async () => {
+      const res = await getEndTime();
+      setendTime(parseInt(res, 10));
+      console.log("end time", endTime);
     };
     const getLastDepositoraddress = async () => {
       const res = await getLastDepositor();
@@ -161,18 +171,28 @@ const useBlockchainData = () => {
       console.log("depo", mydeposit);
     };
 
+    const getTime = async () => {
+      const res = await getRemainingTime();
+      const timeInSecond = parseInt(res, 10);
+      setTimeForClock(timeInSecond);
+      console.log("time for clock", timeInSecond);
+      localStorage.setItem("timerValue", timeInSecond);
+    };
+
     const intervalId = setInterval(() => {
       getPotvalue();
       getTotalPlayersfunc();
-
+      getTime();
       getdepo();
       getLastDepositoraddress();
       getIndividualDeposit();
+      getEndTimeForClock();
     }, 1000); // Update the data every second
 
     getPotvalue();
     getTotalPlayersfunc();
-
+    getTime();
+    getEndTimeForClock();
     // Clean up the interval when the component unmounts
     return () => {
       clearInterval(intervalId);
@@ -184,8 +204,9 @@ const useBlockchainData = () => {
     totalPlayers,
     LastDepositor,
     mydeposit,
-
+    timeForClock,
     depositamount,
+    endTime,
   };
 };
 
@@ -196,8 +217,9 @@ const Deposit = () => {
     totalPlayers,
     LastDepositor,
     mydeposit,
-
+    timeForClock,
     depositamount,
+    endTime,
   } = useBlockchainData();
 
   const [expiryTimestamp, setExpiryTimestamp] = useState(0); // Add expiryTimestamp state
@@ -375,12 +397,9 @@ const Deposit = () => {
           <>
             <>
               <p className="text-center text-xl">Remaining Time:</p>
-              {/* <MyTimer expiryTimestamp={timer} gotTime={gotTime} /> */}
-              {console.log(timer)}
-              {console.log(localStorage.getItem("timerValue"))}
-              <CountdownTimer
-                initialTime={localStorage.getItem("timerValue")}
-              />
+
+              {console.log(endTime)}
+              <CountdownTimer timestamp={endTime} />
             </>
           </>
         ) : (
@@ -415,3 +434,40 @@ const Deposit = () => {
 };
 
 export default Deposit;
+
+const CountdownTimer = ({ timestamp }) => {
+  const [countdown, setCountdown] = useState(getTimeRemaining(timestamp));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCountdown(getTimeRemaining(timestamp));
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timestamp]);
+
+  function getTimeRemaining(targetTime) {
+    const currentTime = Math.floor(Date.now() / 1000); // Convert to seconds
+    const remainingTime = targetTime - currentTime;
+
+    if (remainingTime <= 0) {
+      return { minutes: 0, seconds: 0 };
+    }
+
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+
+    return { minutes, seconds };
+  }
+
+  return (
+    <div>
+      <p>Countdown Timer:</p>
+      <p>
+        {countdown.minutes} minutes, {countdown.seconds} seconds
+      </p>
+    </div>
+  );
+};
