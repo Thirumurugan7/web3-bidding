@@ -351,85 +351,87 @@ const Deposit = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center  pb-0 pt-40 text-white">
-      <div className="flex flex-row space-x-20 rounded-lg border-x border-x-white p-5 pb-16">
-        {isGameEnded ? (
-          <></>
-        ) : (
-          <div className="">
-            <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 pb-[50px]">
-              <p>My Deposit:</p>
-              <p className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-                {mydeposit}
-              </p>
+    <>
+      <div className="flex flex-col items-center justify-center  pb-0 pt-40 text-white">
+        <div className="flex flex-row space-x-20 rounded-lg border-x border-x-white p-5 pb-16">
+          {isGameEnded ? (
+            <></>
+          ) : (
+            <div className="">
+              <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 pb-[50px]">
+                <p>My Deposit:</p>
+                <p className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
+                  {mydeposit}
+                </p>
+              </div>
             </div>
+          )}
+
+          <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
+            <p>Deposit Amount: </p>
+            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
+              {depositamount}
+            </button>
           </div>
-        )}
-
-        <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
-          <p>Deposit Amount: </p>
-          <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-            {depositamount}
-          </button>
-        </div>
-        <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
-          <p>Pot Value:</p>
-          <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-            {potvalue}
-          </button>
-        </div>
-        <div className="flex flex-col rounded-lg border border-white border-x-white p-8 ">
-          <p className="text-center">
-            {" "}
-            Total Number<br></br> of players:
-          </p>
-          <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-            {totalPlayers}
-          </button>
-        </div>
-      </div>
-      <h1 className="mb-8 pt-5 text-4xl font-bold">Welcome to Bidding App</h1>
-      <p className="mb-4 text-lg">Place your bids with cryptocurrency</p>
-      <p className="mb-4 text-lg">Win exciting rewards!</p>
-
-      <div>
-        {gotTime ? (
-          <>
-            <>
-              <p className="text-center text-xl">Remaining Time:</p>
-
-              {console.log(endTime)}
-              <CountdownTimer timestamp={endTime} />
-            </>
-          </>
-        ) : (
-          <p>Time not got</p>
-        )}
-      </div>
-
-      <div className="mt-8">
-        {isGameEnded ? (
-          <>
-            <p className="text-center text-xl font-bold text-green-500">
+          <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
+            <p>Pot Value:</p>
+            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
+              {potvalue}
+            </button>
+          </div>
+          <div className="flex flex-col rounded-lg border border-white border-x-white p-8 ">
+            <p className="text-center">
               {" "}
-              Last Game Winner: {LastDepositor}
+              Total Number<br></br> of players:
             </p>
-            <p className="text-center text-xl font-bold text-red-800">
-              Ooops, Game is ended.
-              <br /> wait for the game to reset......
-            </p>
-          </>
-        ) : (
-          <button
-            className="rounded-lg bg-blue-700  px-6 py-3 text-white shadow-lg"
-            onClick={handleClick}
-          >
-            Deposit
-          </button>
-        )}
+            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
+              {totalPlayers}
+            </button>
+          </div>
+        </div>
+        <h1 className="mb-8 pt-5 text-4xl font-bold">Welcome to Bidding App</h1>
+        <p className="mb-4 text-lg">Place your bids with cryptocurrency</p>
+        <p className="mb-4 text-lg">Win exciting rewards!</p>
+
+        <div>
+          {gotTime ? (
+            <>
+              <>
+                <p className="text-center text-xl">Remaining Time:</p>
+
+                {console.log(endTime)}
+                <CountdownTimer timestamp={endTime} />
+              </>
+            </>
+          ) : (
+            <p>Time not got</p>
+          )}
+        </div>
+
+        <div className="mt-8">
+          {isGameEnded ? (
+            <>
+              <p className="text-center text-xl font-bold text-green-500">
+                {" "}
+                Last Game Winner: {LastDepositor}
+              </p>
+              <p className="text-center text-xl font-bold text-red-800">
+                Ooops, Game is ended.
+                <br /> wait for the game to reset......
+              </p>
+            </>
+          ) : (
+            <button
+              className="rounded-lg bg-blue-700  px-6 py-3 text-white shadow-lg"
+              onClick={handleClick}
+            >
+              Deposit
+            </button>
+          )}
+        </div>
+        <RefreshButton />
       </div>
-      <RefreshButton />
-    </div>
+    </>
   );
 };
 
