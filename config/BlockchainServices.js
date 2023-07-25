@@ -1,6 +1,7 @@
 import Web3 from "web3";
 import gamblingabi from "../pages/abi/gambling.json";
 import { ethers } from "ethers";
+import { toUtf8Bytes } from "ethers/lib/utils.js";
 
 const isBrowser = () => typeof window !== "undefined"; //The approach recommended by Next.js
 const { ethereum } = isBrowser();
@@ -9,7 +10,7 @@ if (ethereum) {
   isBrowser().web3 = new Web3(isBrowser().web3.currentProvider);
 }
 
-const Address = "0x3c58c73dB782DA30a2fFE6449DA13fd6d68D5dA3";
+const Address = "0x92Dd5bb432cb3C74f9cB86F57Bd95dc1aa2a0060";
 
 export const deposit = async ({ getupdatedamount }) => {
   const provider =
