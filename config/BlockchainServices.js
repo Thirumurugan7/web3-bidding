@@ -10,7 +10,7 @@ if (ethereum) {
   isBrowser().web3 = new Web3(isBrowser().web3.currentProvider);
 }
 
-const Address = "0x92Dd5bb432cb3C74f9cB86F57Bd95dc1aa2a0060";
+const Address = "0x765c963A0f5C4cDFe19aF84197597095F40E5DB7";
 
 export const deposit = async ({ getupdatedamount }) => {
   const provider =
