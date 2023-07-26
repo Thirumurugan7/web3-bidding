@@ -188,12 +188,11 @@ const useBlockchainData = () => {
       getIndividualDeposit();
       getEndTimeForClock();
     }, 1000); // Update the data every second
-
+    getIndividualDeposit();
     getPotvalue();
     getTotalPlayersfunc();
     getTime();
     getEndTimeForClock();
-    getIndividualDeposit();
 
     // Clean up the interval when the component unmounts
     return () => {
