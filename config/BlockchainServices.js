@@ -137,7 +137,7 @@ export const getAllWinners = async () => {
       : ethers.providers.getDefaultProvider();
   const signer = provider.getSigner();
   const Role = new ethers.Contract(Address, gamblingabi, signer);
-  const tokenId = await Role.getAllWinners();
+  const tokenId = await Role.getWinners();
   return tokenId;
 };
 
