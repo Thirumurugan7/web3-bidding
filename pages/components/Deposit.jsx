@@ -387,7 +387,7 @@ const Deposit = () => {
 
   return (
     <>
-      <div className="flex h-screen flex-col items-center  justify-center pb-0 pt-[140px] text-white">
+      <div className="flex h-screen flex-col items-center  justify-center pb-0 pt-[150px] text-white">
         <div className="flex w-full items-center justify-between">
           <div className="mr-[10px] flex flex-col items-center justify-end  space-y-2 rounded-3xl bg-transparent p-5 px-[30px] pb-[50px]">
             <p className="text-xl text-black">Current Bid: </p>
@@ -396,7 +396,7 @@ const Deposit = () => {
             </button>
           </div>
           <div className="flex flex-col">
-            <h1 className="mb-8 pt-5 text-4xl font-bold">
+            <h1 className="mb-8 pt-10 text-4xl font-bold">
               Welcome to Bidding App
             </h1>
             <h1 className="mb-4 text-center text-xl font-semibold">
@@ -467,7 +467,12 @@ const Deposit = () => {
                 <>
                   <p className="text-center text-xl font-bold text-green-500">
                     {" "}
-                    Winner: {LastDepositor}
+                    {LastDepositor ==
+                    "0x0000000000000000000000000000000000000000" ? (
+                      <p>No one played😥</p>
+                    ) : (
+                      <p>Winner:{LastDepositor}</p>
+                    )}
                   </p>
                   <p className="text-center text-xl font-bold text-red-800">
                     Ooops, Game is ended.

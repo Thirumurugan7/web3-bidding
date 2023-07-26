@@ -40,7 +40,7 @@ contract DepositSplitContract {
     event n3();
 
     constructor() {
-        defaultTime = 600;
+        defaultTime = 50;
         owner = payable(msg.sender);
         owners[msg.sender] = true; // The deployer of the contract is also an owner
         depositAmount = 10 ether;
@@ -58,7 +58,7 @@ contract DepositSplitContract {
         endTime += 10;
         lastDepositor = payable(msg.sender);
         playerDepositCount[msg.sender]++;
-        playerTotalDeposit[msg.sender] += 10 ether;
+        playerTotalDeposit[msg.sender] += depositAmount;
         emit n3();
         pot += uint256(msg.value);
 
@@ -95,6 +95,7 @@ contract DepositSplitContract {
         totalPlayers = 0;
         pot = 0;
         resetTime();
+       lastDepositor = payable(address(0));
         for (uint32 i = 0; i < depositingPlayers.length; i++) {
             address playerAddress = depositingPlayers[i];
             playerDepositCount[playerAddress] = 0;
@@ -195,4 +196,7 @@ contract DepositSplitContract {
     function getDepositors() external view returns (address[] memory) {
         return depositingPlayers;
     }
+    function getWinners() external view returns (Winner[] memory) {
+    return winners;
+}
 }
