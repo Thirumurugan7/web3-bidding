@@ -35,7 +35,7 @@ const LeaderBoard = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-purple-500 via-pink-500 to-red-500">
+    <div className="flex min-h-full flex-col items-center justify-center overflow-auto scroll-smooth bg-gradient-to-b from-purple-500 via-pink-500 to-red-500 py-[150px]">
       <motion.h1
         className="mb-8 text-4xl font-bold text-white"
         initial={{ opacity: 0, y: -50 }}

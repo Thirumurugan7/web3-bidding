@@ -211,6 +211,12 @@ const useBlockchainData = () => {
 };
 
 const Deposit = () => {
+  const myStyles = {
+    color: "black",
+
+    // Add more styles as needed
+  };
+
   const { timer, gotTime } = useTimer();
   const {
     potvalue,
@@ -246,6 +252,7 @@ const Deposit = () => {
             await changeMetaMaskNetwork();
             // Optionally, you can provide the user with a link or instructions to switch networks.
             // For example, you can direct them to a guide on how to change networks in MetaMask.
+            window.location.reload();
           }
         } catch (error) {
           console.error(error);
@@ -352,83 +359,128 @@ const Deposit = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center  pb-0 pt-40 text-white">
-        <div className="flex flex-row space-x-20 rounded-lg border-x border-x-white p-5 pb-16">
+      <div className="flex h-screen flex-col items-center  justify-center pb-0 pt-[140px] text-white">
+        <div className="flex w-full items-center justify-between">
+          <div className="mr-[10px] flex flex-col items-center justify-end  space-y-2 rounded-3xl bg-transparent p-5 px-[30px] pb-[50px]">
+            <p className="text-xl text-black">Deposit Amount: </p>
+            <button className="rounded-lg bg-white px-6 py-3 text-black shadow-lg">
+              {depositamount}
+            </button>
+          </div>
+          <h1 className="mb-8 pt-5 text-4xl font-bold">
+            Welcome to Bidding App
+          </h1>
           {isGameEnded ? (
-            <></>
+            <>
+              {" "}
+              <div className=" flex  items-end justify-end">
+                <div className="mr-[10px] flex flex-col items-center justify-end space-y-2  rounded-3xl bg-transparent p-5 px-[30px] pb-[50px] text-black">
+                  <p className="text-xl text-black">My Deposit:</p>
+                  <p className="rounded-lg bg-white px-6 py-3 text-black shadow-lg">
+                    {mydeposit}
+                  </p>
+                </div>
+              </div>
+            </>
           ) : (
-            <div className="">
-              <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 pb-[50px]">
-                <p>My Deposit:</p>
-                <p className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
+            <div className=" flex  items-end justify-end">
+              <div className="mr-[10px] flex flex-col items-center justify-end  space-y-2 rounded-3xl bg-transparent p-5 px-[30px] pb-[50px] text-black">
+                <p className="text-xl">My Deposit:</p>
+                <p className="rounded-lg bg-white px-6 py-3 text-black shadow-lg">
                   {mydeposit}
                 </p>
               </div>
             </div>
           )}
+        </div>
 
-          <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
-            <p>Deposit Amount: </p>
-            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-              {depositamount}
-            </button>
+        <div className=" flex w-full flex-row justify-between space-x-20  border-x-white p-5 pb-16">
+          <div className="flex flex-col items-center justify-center  space-y-2 px-[30px] ">
+            <div className="  bg-opacity-70">
+              <div className="text-center text-6xl">💲</div>
+              <p className="text- text-2xl text-black"> Pot Value:</p>
+              <button className="my-3 w-full rounded-lg bg-white px-6 py-3 text-black shadow-lg">
+                {potvalue}
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col space-y-2 rounded-lg border border-white border-x-white p-8 ">
-            <p>Pot Value:</p>
-            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
-              {potvalue}
-            </button>
+
+          <div>
+            <p className="mb-4 text-center text-lg">
+              Place your bids with cryptocurrency
+            </p>
+            <p className="mb-4 text-center text-lg">Win exciting rewards!</p>
+
+            <div>
+              {gotTime ? (
+                <>
+                  <>
+                    <p className="text-center text-xl">Remaining Time:</p>
+
+                    {console.log(endTime)}
+                    <CountdownTimer timestamp={endTime} />
+                  </>
+                </>
+              ) : (
+                <p>Time not got</p>
+              )}
+            </div>
+
+            <div className="mt-8">
+              {isGameEnded ? (
+                <>
+                  <p className="text-center text-xl font-bold text-green-500">
+                    {" "}
+                    Winner: {LastDepositor}
+                  </p>
+                  <p className="text-center text-xl font-bold text-red-800">
+                    Ooops, Game is ended.
+                    <br /> wait for the game to reset......
+                  </p>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center">
+                  <div className="flex items-center justify-center">
+                    <button
+                      className="rounded-lg bg-blue-700  px-6 py-3 text-white shadow-lg"
+                      onClick={handleClick}
+                    >
+                      Deposit
+                    </button>
+                  </div>
+                  {totalPlayers > 0 ? (
+                    <div className="pt-[50px]">
+                      <h1 className="text-center text-xl font-bold text-zinc-300">
+                        Current winner:{" "}
+                        <span className="text-amber-950">{LastDepositor}</span>
+                      </h1>
+
+                      <h1 className="pt-[30px] text-center text-xl  font-bold text-zinc-300 ">
+                        bagging{" "}
+                        <span className="text-amber-950">{potvalue}</span> BFC
+                      </h1>
+                    </div>
+                  ) : (
+                    <h1 className="pt-[80px] text-center text-xl font-bold text-amber-950">
+                      No participants yet!
+                    </h1>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-          <div className="flex flex-col rounded-lg border border-white border-x-white p-8 ">
-            <p className="text-center">
+          <div className="flex flex-col items-center justify-center  space-y-2 px-[30px] ">
+            <div className="text-center text-6xl">👤</div>
+            <p className="text- text-center text-2xl text-black">
               {" "}
               Total Number<br></br> of players:
             </p>
-            <button className="rounded-lg bg-green-500 px-6 py-3 text-white shadow-lg">
+            <button className="w-full rounded-lg bg-white px-6 py-3 text-black shadow-lg">
               {totalPlayers}
             </button>
           </div>
         </div>
-        <h1 className="mb-8 pt-5 text-4xl font-bold">Welcome to Bidding App</h1>
-        <p className="mb-4 text-lg">Place your bids with cryptocurrency</p>
-        <p className="mb-4 text-lg">Win exciting rewards!</p>
 
-        <div>
-          {gotTime ? (
-            <>
-              <>
-                <p className="text-center text-xl">Remaining Time:</p>
-
-                {console.log(endTime)}
-                <CountdownTimer timestamp={endTime} />
-              </>
-            </>
-          ) : (
-            <p>Time not got</p>
-          )}
-        </div>
-
-        <div className="mt-8">
-          {isGameEnded ? (
-            <>
-              <p className="text-center text-xl font-bold text-green-500">
-                {" "}
-                Last Game Winner: {LastDepositor}
-              </p>
-              <p className="text-center text-xl font-bold text-red-800">
-                Ooops, Game is ended.
-                <br /> wait for the game to reset......
-              </p>
-            </>
-          ) : (
-            <button
-              className="rounded-lg bg-blue-700  px-6 py-3 text-white shadow-lg"
-              onClick={handleClick}
-            >
-              Deposit
-            </button>
-          )}
-        </div>
         <RefreshButton />
       </div>
     </>
@@ -466,9 +518,9 @@ const CountdownTimer = ({ timestamp }) => {
 
   return (
     <div>
-      <p>Countdown Timer:</p>
-      <p>
-        {countdown.minutes} minutes, {countdown.seconds} seconds
+      <p className="text-center">
+        <span className="text-8xl"> {countdown.minutes}</span> minutes,{" "}
+        <span className="text-8xl"> {countdown.seconds}</span> seconds
       </p>
     </div>
   );
