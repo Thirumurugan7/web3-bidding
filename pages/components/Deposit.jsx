@@ -82,6 +82,28 @@ const useTimer = () => {
       localStorage.setItem("timerValue", parseInt(res, 10));
       const time = formatTime(res.toString());
       console.log("rem timme:", time, typeof time);
+      function isBlockchainTimestampEqualCurrentTime(blockchainTimestamp) {
+        // Convert the blockchain timestamp to milliseconds (JavaScript Date uses milliseconds)
+        const timestampInMillis = blockchainTimestamp * 1000;
+
+        // Create a new Date object with the converted timestamp
+        const dateFromBlockchain = new Date(timestampInMillis);
+        console.log(dateFromBlockchain, "blockstamp");
+        // Get the current date and time
+        const currentDate = new Date();
+
+        // Compare the two dates for equality
+        return dateFromBlockchain.getTime() === currentDate.getTime();
+      }
+      const res1 = await getEndTime();
+
+      console.log("end time", parseInt(res1, 10));
+      console.log(
+        "cond",
+        isBlockchainTimestampEqualCurrentTime(parseInt(res1, 10))
+      );
+
+      const check = isBlockchainTimestampEqualCurrentTime(parseInt(res1, 10));
 
       if (time === "0" || time === "00:00" || endGame) {
         // Wait for 15 seconds
@@ -364,7 +386,7 @@ const Deposit = () => {
       <div className="flex h-screen flex-col items-center  justify-center pb-0 pt-[140px] text-white">
         <div className="flex w-full items-center justify-between">
           <div className="mr-[10px] flex flex-col items-center justify-end  space-y-2 rounded-3xl bg-transparent p-5 px-[30px] pb-[50px]">
-            <p className="text-xl text-black">Deposit Amount: </p>
+            <p className="text-xl text-black">Current Bid: </p>
             <button className="rounded-lg bg-white px-6 py-3 text-black shadow-lg">
               {depositamount}
             </button>
