@@ -348,6 +348,7 @@ const Deposit = () => {
         }
       } catch (error) {
         console.error(error);
+        alert("Transaction failed, Check your balance and try again");
         // Handle error (e.g., user rejected the request or something went wrong)
       }
     } else {
