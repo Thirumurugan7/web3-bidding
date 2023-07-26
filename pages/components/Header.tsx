@@ -5,7 +5,6 @@ import { Dialog } from "@headlessui/react";
 import { AiOutlineBars } from "react-icons/ai";
 import { HiXMark } from "react-icons/hi2";
 import Web3 from "web3";
-import truncateEthAddress from "truncate-eth-address";
 import { useState } from "react";
 import { Web3Context } from "../../config/Web3Context";
 import { ethers } from "ethers";
@@ -40,6 +39,11 @@ const Header = () => {
       return null;
     }
   };
+  const [accountAddress, setAccountAddress] = useState(address);
+
+  useEffect(() => {
+    setAccountAddress(address);
+  }, [address]);
 
   const connectToWeb3 = async (): Promise<void> => {
     try {
@@ -87,6 +91,13 @@ const Header = () => {
   if (typeof window !== "undefined") {
     localStorage.setItem("walletaddress", address || "");
   }
+
+  const truncateEthAddress = (address) => {
+    if (!address) return ""; // Return an empty string if address is not provided
+    const start = address.slice(0, 6);
+    const end = address.slice(-4);
+    return `${start}...${end}`;
+  };
   return (
     <Web3Context.Provider value={Web3}>
       <header className="absolute inset-x-0 top-0 z-50 bg-black">
@@ -148,7 +159,7 @@ const Header = () => {
             {connected ? (
               <>
                 <div className="text-md pt-2 font-bold text-blue-300">
-                  My Account: {truncateEthAddress(address)}
+                  My Account: {truncateEthAddress(accountAddress)}
                 </div>
                 <button
                   className="text-md btn-grad1 pt-2 font-bold text-white"
@@ -227,21 +238,27 @@ const Header = () => {
                 </div>
                 <div className="py-6">
                   <p className=" block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-200 hover:bg-gray-700">
-                    {connected ? (
+                    {accountAddress && (
                       <>
-                        <div>My Account: {truncateEthAddress(address)}</div>
-
-                        <button
-                          className="btn-grad1"
-                          onClick={handleDisconnect}
-                        >
-                          Disconnect
-                        </button>
+                        <div className="text-md pt-2 font-bold text-blue-300">
+                          My Account: {truncateEthAddress(accountAddress)}
+                        </div>
+                        {connected ? (
+                          <button
+                            className="text-md btn-grad1 pt-2 font-bold text-white"
+                            onClick={handleDisconnect}
+                          >
+                            Disconnect
+                          </button>
+                        ) : (
+                          <button
+                            className="text-md btn-grad pt-2 font-bold text-white"
+                            onClick={handleConnect}
+                          >
+                            Connect
+                          </button>
+                        )}
                       </>
-                    ) : (
-                      <button className="btn-grad" onClick={handleConnect}>
-                        Connect
-                      </button>
                     )}
                   </p>
                 </div>

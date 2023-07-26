@@ -19,7 +19,7 @@ const LeaderBoard = () => {
     });
 
     console.log(winnerDataArray);
-    setWinnerData(winnerDataArray);
+    setWinnerData(winnerDataArray.reverse());
   };
 
   useEffect(() => {
