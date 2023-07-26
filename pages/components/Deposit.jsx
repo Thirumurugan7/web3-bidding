@@ -402,6 +402,9 @@ const Deposit = () => {
             <h1 className="mb-4 text-center text-xl font-semibold">
               Place your bids with cryptocurrency
             </h1>
+            <h1 className="mb-4 text-center text-xl font-semibold">
+              Winner takes all
+            </h1>
             {/* <h1 className="mb-4 text-center text-lg">Win exciting rewards!</h1> */}
           </div>
           {isGameEnded ? (
@@ -409,7 +412,9 @@ const Deposit = () => {
               {" "}
               <div className=" flex  items-end justify-end">
                 <div className="mr-[10px] flex flex-col items-center justify-end space-y-2  rounded-3xl bg-transparent p-5 px-[30px] pb-[50px] text-black">
-                  <p className="text-xl text-black">My Deposit:</p>
+                  <p className="text-xl text-black">
+                    Your deposit in current game:
+                  </p>
                   <p className="rounded-lg bg-white px-6 py-3 text-black shadow-lg">
                     {mydeposit}
                   </p>
@@ -419,7 +424,7 @@ const Deposit = () => {
           ) : (
             <div className=" flex  items-end justify-end">
               <div className="mr-[10px] flex flex-col items-center justify-end  space-y-2 rounded-3xl bg-transparent p-5 px-[30px] pb-[50px] text-black">
-                <p className="text-xl">My Deposit:</p>
+                <p className="text-xl">Your deposit in current game:</p>
                 <p className="rounded-lg bg-white px-6 py-3 text-black shadow-lg">
                   {mydeposit}
                 </p>
