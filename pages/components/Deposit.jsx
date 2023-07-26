@@ -367,9 +367,15 @@ const Deposit = () => {
               {depositamount}
             </button>
           </div>
-          <h1 className="mb-8 pt-5 text-4xl font-bold">
-            Welcome to Bidding App
-          </h1>
+          <div className="flex flex-col">
+            <h1 className="mb-8 pt-5 text-4xl font-bold">
+              Welcome to Bidding App
+            </h1>
+            <h1 className="mb-4 text-center text-xl font-semibold">
+              Place your bids with cryptocurrency
+            </h1>
+            {/* <h1 className="mb-4 text-center text-lg">Win exciting rewards!</h1> */}
+          </div>
           {isGameEnded ? (
             <>
               {" "}
@@ -398,24 +404,21 @@ const Deposit = () => {
           <div className="flex flex-col items-center justify-center  space-y-2 px-[30px] ">
             <div className="  bg-opacity-70">
               <div className="text-center text-6xl">💲</div>
-              <p className="text- text-2xl text-black"> Pot Value:</p>
+              <p className="text- pt-[20px] text-2xl text-black"> Pot Value:</p>
               <button className="my-3 w-full rounded-lg bg-white px-6 py-3 text-black shadow-lg">
                 {potvalue}
               </button>
             </div>
           </div>
 
-          <div>
-            <p className="mb-4 text-center text-lg">
-              Place your bids with cryptocurrency
-            </p>
-            <p className="mb-4 text-center text-lg">Win exciting rewards!</p>
-
+          <div className="pt-[50px]">
             <div>
               {gotTime ? (
                 <>
                   <>
-                    <p className="text-center text-xl">Remaining Time:</p>
+                    <p className="text-bold py-[20px] text-center text-xl font-extrabold">
+                      Remaining Time:
+                    </p>
 
                     {console.log(endTime)}
                     <CountdownTimer timestamp={endTime} />
@@ -471,7 +474,7 @@ const Deposit = () => {
           </div>
           <div className="flex flex-col items-center justify-center  space-y-2 px-[30px] ">
             <div className="text-center text-6xl">👤</div>
-            <p className="text- text-center text-2xl text-black">
+            <p className="text- pt-[10px] text-center text-2xl text-black">
               {" "}
               Total Number<br></br> of players:
             </p>
