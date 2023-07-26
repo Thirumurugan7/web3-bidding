@@ -339,6 +339,9 @@ const Deposit = () => {
       console.error("Error changing network:", error);
       // Handle error or prompt user to switch manually
       alert("your wallet do not have bifrost network configured");
+      alert("https://chainlist.org/?search=bifrost&testnets=true");
+      window.location.href =
+        "https://chainlist.org/?search=bifrost&testnets=true";
     }
   }
   const handleClick = async () => {

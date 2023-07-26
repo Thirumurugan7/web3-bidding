@@ -53,6 +53,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
+    "react-modal": "^3.16.1",
     "react-timer-hook": "^3.0.7",
     "recharts": "^2.7.2",
     "stream-browserify": "^3.0.0",
