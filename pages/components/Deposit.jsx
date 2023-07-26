@@ -387,7 +387,7 @@ const Deposit = () => {
 
   return (
     <>
-      <div className="flex h-screen flex-col items-center  justify-center pb-0 pt-[150px] text-white">
+      <div className="mb-[50px] flex h-screen flex-col  items-center   justify-center pt-[150px] text-white">
         <div className="flex w-full items-center justify-between">
           <div className="mr-[10px] flex flex-col items-center justify-end  space-y-2 rounded-3xl bg-transparent p-5 px-[30px] pb-[50px]">
             <p className="text-xl text-black">Current Bid: </p>
