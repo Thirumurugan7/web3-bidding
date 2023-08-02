@@ -9,7 +9,7 @@ const LeaderBoard = () => {
   const allWinners = async () => {
     console.log("getting allWinners");
     const res = await getAllWinners();
-
+// getting the winners list
     const winnerDataArray = res.map((winner: any) => {
       return {
         address: winner[0],
@@ -77,15 +77,7 @@ const LeaderBoard = () => {
           </tbody>
         </table>
       </div>
-      {/* <div className="mt-8">
-        <motion.img
-          src="../winner.jpeg"
-          alt="Winner Celebration"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-        />
-      </div> */}
+    
     </div>
   );
 };

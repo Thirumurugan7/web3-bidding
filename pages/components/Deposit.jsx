@@ -56,6 +56,7 @@ const useTimer = () => {
   }, [timer]);
 
   useEffect(() => {
+    //getting the remaining time in current game
     const handleGetTime = async () => {
       const res = await getRemainingTime();
       const timeInSecond = parseInt(res, 10);
@@ -74,7 +75,7 @@ const useTimer = () => {
       console.log(endGame);
       setTimer(time);
     };
-
+    //restting the game automatically once the game is finished
     const automateSplitAndUnfreeze = async () => {
       // Check if the game is not frozen and remaining time is 0
       console.log("Timer:", timer);
@@ -161,38 +162,44 @@ const useBlockchainData = () => {
   // const [address, setaddress] = useState("");
   const [depositamount, setdeposit] = useState("");
   useEffect(() => {
+    //getting the pot value
     const getPotvalue = async () => {
       const res = await getPot();
       const ethValue = weiToEth(res.toString());
       setPotvalue(ethValue);
     };
-
+    //getting the end time
     const getEndTimeForClock = async () => {
       const res = await getEndTime();
       setendTime(parseInt(res, 10));
       console.log("end time", endTime);
     };
+    //getting the last depositor
     const getLastDepositoraddress = async () => {
       const res = await getLastDepositor();
       setlastDepositor(res);
     };
-
+    //getting the total players in the current game
     const getTotalPlayersfunc = async () => {
       const res = await getTotalPlayers();
       setTotalPlayers(res.toString());
     };
+
+    //gettting the deposit of the current game
     const getdepo = async () => {
       const res = await getDepositAmount();
       const eth = gweiToEth(res.toString());
       setdeposit(gweiToEth(eth));
     };
+
+    //get  the individual deposit amount
     const getIndividualDeposit = async () => {
       const res = await getPlayerTotalDeposit({ address });
       const eth = gweiToEth(res.toString());
       SetMydeposit(gweiToEth(eth));
       console.log("depo", mydeposit);
     };
-
+    //get the remaining time in the game
     const getTime = async () => {
       const res = await getRemainingTime();
       const timeInSecond = parseInt(res, 10);
